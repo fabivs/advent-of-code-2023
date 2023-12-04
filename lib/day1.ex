@@ -3,6 +3,8 @@ defmodule Day1 do
   https://adventofcode.com/2023/day/1
   """
 
+  import Helpers
+
   @numbers %{
     "one" => "1",
     "two" => "2",
@@ -52,7 +54,7 @@ defmodule Day1 do
       |> String.replace(numbers_as_text_patterns, fn matching_pattern ->
         Map.get(@numbers, matching_pattern, matching_pattern)
       end)
-      |> get_first_number_of_string()
+      |> get_first_single_digit_number_in_string()
 
     reversed_line = String.reverse(line)
     reversed_numbers_as_patterns = Enum.map(numbers_as_text_patterns, &String.reverse/1)
@@ -63,24 +65,9 @@ defmodule Day1 do
         restored_pattern = String.reverse(matching_pattern)
         Map.get(@numbers, restored_pattern, matching_pattern)
       end)
-      |> get_first_number_of_string()
+      |> get_first_single_digit_number_in_string()
       |> String.reverse()
 
     Enum.join([first_value, last_value]) |> String.to_integer()
-  end
-
-  defp get_first_number_of_string(string) do
-    string
-    |> String.codepoints()
-    |> Enum.find(&is_codepoint_a_number?/1)
-  end
-
-  defp is_codepoint_a_number?(codepoint) do
-    try do
-      _ = String.to_integer(codepoint)
-      true
-    rescue
-      _error -> false
-    end
   end
 end
