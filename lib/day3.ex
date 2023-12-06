@@ -65,11 +65,7 @@ defmodule Day3 do
       )
     end
 
-    defp update_map_if_index_in_bounds(map, index, update_function) do
-      Map.update(map, index, map, update_function)
-    end
-
-    defp all_valid_numbers(input, symbols_coords) do
+    def all_valid_numbers(input, symbols_coords) do
       input
       |> String.trim()
       |> String.split("\n")
@@ -149,12 +145,92 @@ defmodule Day3 do
   end
 
   defmodule Part2 do
-    def total_gear_ratios(input) do
-      # Check only for * as valid symbols
+    def total_gear_ratios(input, current_total \\ 0) do
+      IO.inspect(current_total)
+      # Check only for * as valid stars
       # Maybe do it with the recursion, one star at a time
       # For every star, do the same, but add the constraint of exactly 2 numbers
       # Recursion by keeping the current gear ratio, until there are no stars left
-      0
+      case input |> filter_first_star() |> first_star_valid_coords() do
+        nil ->
+          current_total
+
+        first_star_valid_coords ->
+          valid_numbers = Part1.all_valid_numbers(input, first_star_valid_coords)
+
+          if length(valid_numbers) == 2 do
+            gear_ratio = enum_multiply(valid_numbers)
+            total_gear_ratios(input |> reject_first_star(), current_total + gear_ratio)
+          else
+            total_gear_ratios(input |> reject_first_star(), current_total)
+          end
+      end
+    end
+
+    defp reject_first_star(input) do
+      String.replace(input, "*", ".", global: false)
+    end
+
+    defp filter_first_star(input) do
+      input
+      |> String.trim()
+      |> String.split("\n")
+      |> Enum.with_index()
+      |> Enum.map_reduce({%{}, false}, fn {line, line_index}, {result_map, star_found?} ->
+        if star_found? do
+          {{[], line_index}, {result_map, true}}
+        else
+          line_stars_positions =
+            line
+            |> String.codepoints()
+            |> Enum.with_index()
+            |> Enum.filter(fn {char, _column_index} -> char == "*" end)
+            |> Enum.map(fn {_star, position} -> position end)
+
+          if length(line_stars_positions) > 0 do
+            {{[List.first(line_stars_positions)], line_index}, {result_map, true}}
+          else
+            {{line_stars_positions, line_index}, {result_map, false}}
+          end
+        end
+      end)
+      |> elem(0)
+      |> Map.new(fn {positions, line_index} -> {line_index, positions} end)
+    end
+
+    defp first_star_valid_coords(line_to_stars_positions_map) do
+      case Enum.find(line_to_stars_positions_map, nil, fn {_line_index, line_positions} ->
+             length(line_positions) > 0
+           end) do
+        nil ->
+          nil
+
+        {star_index, stars_positions} ->
+          first_star_position = List.first(stars_positions)
+
+          Enum.reduce(
+            line_to_stars_positions_map,
+            line_to_stars_positions_map,
+            fn {current_line_index, _current_line_positions}, result_map ->
+              if current_line_index == star_index do
+                result_map
+                |> update_map_if_index_in_bounds(current_line_index - 1, fn valid_positions ->
+                  valid_positions ++
+                    [first_star_position - 1, first_star_position, first_star_position + 1]
+                end)
+                |> update_map_if_index_in_bounds(current_line_index, fn valid_positions ->
+                  valid_positions ++ [first_star_position - 1, first_star_position + 1]
+                end)
+                |> update_map_if_index_in_bounds(current_line_index + 1, fn valid_positions ->
+                  valid_positions ++
+                    [first_star_position - 1, first_star_position, first_star_position + 1]
+                end)
+              else
+                result_map
+              end
+            end
+          )
+      end
     end
   end
 end

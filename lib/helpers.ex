@@ -14,4 +14,14 @@ defmodule Helpers do
       _error -> false
     end
   end
+
+  # Only update the map with the given function if the index is in bounds
+  # otherwise return the map as is
+  def update_map_if_index_in_bounds(map, index, update_function) do
+    Map.update(map, index, map, update_function)
+  end
+
+  def enum_multiply(list_of_integers) do
+    Enum.reduce(list_of_integers, 1, fn number, acc -> number * acc end)
+  end
 end
