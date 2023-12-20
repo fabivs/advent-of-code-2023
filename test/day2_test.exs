@@ -18,9 +18,11 @@ defmodule Day2Test do
       blue: 14
     }
 
+    # Example
     example_result = 8
     assert example_result == Day2.Part1.id_sum_of_possible_games(@example_input, example_bag)
 
+    # Solution
     solution_bag = %{
       red: 12,
       green: 13,
@@ -32,9 +34,11 @@ defmodule Day2Test do
   end
 
   test "find the combined power of all games" do
+    # Example
     example_result = 2286
     assert example_result == Day2.Part2.sum_of_power_of_games(@example_input)
 
+    # Solution
     solution_result = 69629
     assert solution_result == Day2.Part2.sum_of_power_of_games(@solution_input)
   end

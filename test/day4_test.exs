@@ -13,12 +13,16 @@ defmodule Day4Test do
   @solution_input File.read!("inputs/day4_input")
 
   test "part 1" do
+    # Example
     assert 13 == Day4.Part1.total_score(@example_input)
+    # Solution
     assert 23750 == Day4.Part1.total_score(@solution_input)
   end
 
   test "part 2" do
+    # Example
     assert 30 == Day4.Part2.final_number_of_scratchcards(@example_input)
+    # Solution
     assert 13_261_850 == Day4.Part2.final_number_of_scratchcards(@solution_input)
   end
 end
