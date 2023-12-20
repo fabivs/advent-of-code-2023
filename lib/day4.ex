@@ -67,7 +67,7 @@ defmodule Day4 do
               cards_with_amount_list ->
                 Enum.map(cards_with_amount_list, fn {card_num, amount} ->
                   if card_num == card_num_to_update,
-                  # each card amount increases by 1 times the amount of the current card we are evaluating
+                    # each card amount increases by 1 times the amount of the current card we are evaluating
                     do: {card_num_to_update, Kernel.+(amount, amount_of_current_card)},
                     else: {card_num, amount}
                 end)

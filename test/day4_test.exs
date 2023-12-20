@@ -19,6 +19,6 @@ defmodule Day4Test do
 
   test "part 2" do
     assert 30 == Day4.Part2.final_number_of_scratchcards(@example_input)
-    assert 13261850 == Day4.Part2.final_number_of_scratchcards(@solution_input)
+    assert 13_261_850 == Day4.Part2.final_number_of_scratchcards(@solution_input)
   end
 end
