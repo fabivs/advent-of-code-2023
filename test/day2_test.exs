@@ -9,7 +9,7 @@ defmodule Day2Test do
   Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green
   """
 
-  @solution_input File.read!("day2_input")
+  @solution_input File.read!("inputs/day2_input")
 
   test "find the possible games" do
     example_bag = %{

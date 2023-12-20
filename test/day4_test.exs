@@ -10,7 +10,7 @@ defmodule Day4Test do
   Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11
   """
 
-  @solution_input File.read!("day4_input")
+  @solution_input File.read!("inputs/day4_input")
 
   test "part 1" do
     assert 13 == Day4.Part1.total_score(@example_input)

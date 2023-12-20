@@ -14,7 +14,7 @@ defmodule Day3Test do
   .664.598..
   """
 
-  @solution_input File.read!("day3_input")
+  @solution_input File.read!("inputs/day3_input")
 
   test "part 1" do
     assert 4361 == Day3.Part1.total_parts_numbers(@example_input)

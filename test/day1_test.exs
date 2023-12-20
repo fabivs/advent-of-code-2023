@@ -12,7 +12,7 @@ defmodule Day1Test do
     example_result = 142
     assert example_result == Day1.find_calibration_result(example_input)
 
-    {:ok, solution_input} = File.read("day1_input")
+    solution_input = File.read!("inputs/day1_input")
     solution_result = 54968
     assert solution_result == Day1.find_calibration_result(solution_input)
   end
@@ -31,7 +31,7 @@ defmodule Day1Test do
     example_result = 281
     assert example_result == Day1.find_calibration_result_improved(example_input)
 
-    {:ok, solution_input} = File.read("day1_input")
+    solution_input = File.read!("inputs/day1_input")
     solution_result = 54094
     assert solution_result == Day1.find_calibration_result_improved(solution_input)
   end
