@@ -146,7 +146,6 @@ defmodule Day3 do
 
   defmodule Part2 do
     def total_gear_ratios(input, current_total \\ 0) do
-      IO.inspect(current_total)
       # Check only for * as valid stars
       # Maybe do it with the recursion, one star at a time
       # For every star, do the same, but add the constraint of exactly 2 numbers

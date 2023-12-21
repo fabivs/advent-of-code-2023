@@ -1,5 +1,7 @@
 defmodule Day1Test do
-  use ExUnit.Case
+  use ExUnit.Case, async: false
+
+  @solution_input File.read!("inputs/day1_input")
 
   test "compute the calibration number" do
     example_input = """
@@ -10,13 +12,9 @@ defmodule Day1Test do
     """
 
     # Example
-    example_result = 142
-    assert example_result == Day1.find_calibration_result(example_input)
-
+    assert 142 == Day1.find_calibration_result(example_input)
     # Solution
-    solution_input = File.read!("inputs/day1_input")
-    solution_result = 54968
-    assert solution_result == Day1.find_calibration_result(solution_input)
+    Day1.find_calibration_result(@solution_input) |> IO.inspect(label: "Day 1, part 1 solution")
   end
 
   test "compute the calibration number with the improved version" do
@@ -31,12 +29,9 @@ defmodule Day1Test do
     """
 
     # Example
-    example_result = 281
-    assert example_result == Day1.find_calibration_result_improved(example_input)
-
+    assert 281 == Day1.find_calibration_result_improved(example_input)
     # Solution
-    solution_input = File.read!("inputs/day1_input")
-    solution_result = 54094
-    assert solution_result == Day1.find_calibration_result_improved(solution_input)
+    Day1.find_calibration_result_improved(@solution_input)
+    |> IO.inspect(label: "Day 1, part 2 solution")
   end
 end

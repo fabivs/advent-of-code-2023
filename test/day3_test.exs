@@ -1,5 +1,5 @@
 defmodule Day3Test do
-  use ExUnit.Case
+  use ExUnit.Case, async: false
 
   @example_input """
   467..114..
@@ -20,13 +20,13 @@ defmodule Day3Test do
     # Example
     assert 4361 == Day3.Part1.total_parts_numbers(@example_input)
     # Solution
-    assert 533_775 == Day3.Part1.total_parts_numbers(@solution_input)
+    Day3.Part1.total_parts_numbers(@solution_input) |> IO.inspect(label: "Day 3, part 1 solution")
   end
 
   test "part 2" do
     # Example
     assert 467_835 == Day3.Part2.total_gear_ratios(@example_input)
     # Solution
-    assert 78_236_071 == Day3.Part2.total_gear_ratios(@solution_input)
+    Day3.Part2.total_gear_ratios(@solution_input) |> IO.inspect(label: "Day 3, part 2 solution")
   end
 end

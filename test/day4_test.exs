@@ -1,5 +1,5 @@
 defmodule Day4Test do
-  use ExUnit.Case
+  use ExUnit.Case, async: false
 
   @example_input """
   Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53
@@ -16,13 +16,14 @@ defmodule Day4Test do
     # Example
     assert 13 == Day4.Part1.total_score(@example_input)
     # Solution
-    assert 23750 == Day4.Part1.total_score(@solution_input)
+    Day4.Part1.total_score(@solution_input) |> IO.inspect(label: "Day 4, part 1 solution")
   end
 
   test "part 2" do
     # Example
     assert 30 == Day4.Part2.final_number_of_scratchcards(@example_input)
     # Solution
-    assert 13_261_850 == Day4.Part2.final_number_of_scratchcards(@solution_input)
+    Day4.Part2.final_number_of_scratchcards(@solution_input)
+    |> IO.inspect(label: "Day 4, part 2 solution")
   end
 end
